@@ -270,14 +270,14 @@ export default {
           "sub-beta.now.sh (自动编译最新版本后端-测试）": "https://sub-beta.now.sh/sub?",
           "subcon.dlj.tf(subconverter作者提供-稳定)":
             "https://subcon.dlj.tf/sub?",
-          "api.dler.io(sub作者&lhie1提供-稳定)": "https://api.dler.io/sub?",
+          "sub.simongino.tk(myself提供-稳定)": "https://sub.simongino.tk/sub?",
           "api.wcc.best(sub-web作者提供-稳定)": "https://api.wcc.best/sub?",
         },
         backendOptions: [
           { value: "http://localhost:25500/sub?" },
           { value: "https://sub-beta.now.sh/sub?" },
           { value: "https://subcon.dlj.tf/sub?" },
-          { value: "https://api.dler.io/sub?" },
+          { value: "https://sub.simongino.tk/sub?" },
           { value: "https://api.wcc.best/sub?" },
         ],
         remoteConfig: [
@@ -293,6 +293,11 @@ export default {
           {
             label: "ACL4SSR",
             options: [
+              {
+                label: "自用",
+                value:
+                  "https://raw.githubusercontent.com/SimonGino/SubConver-Clash-Profile/master/outpref.ini"
+              },	    
               {
                 label: "ACL4SSR_Online 默认版 分组比较全 (与Github同步)",
                 value:
@@ -569,7 +574,7 @@ export default {
   },
   mounted() {
     this.form.clientType = "clash&new_name=true";
-    this.form.customBackend = "https://sub-beta.now.sh/sub?";
+    this.form.customBackend = "https://sub.simongino.tk/sub?";
     this.form.remoteConfig = "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online.ini";
     this.getBackendVersion();
   },
