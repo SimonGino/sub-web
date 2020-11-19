@@ -281,17 +281,9 @@ export default {
           { value: "https://api.wcc.best/sub?" },
         ],
         remoteConfig: [
-          {
-            label: "默认",
-            options: [
-              {
-                label: "不选,由接口提供方提供",
-                value: ""
-              }
-            ]
-          },
-          {
-            label: "ACL4SSR",
+	{
+
+            label: "个人配置",
             options: [
               {
                 label: "自用-通用版",
@@ -302,11 +294,6 @@ export default {
                 label: "薯条特别版",
                 value:
                   "https://raw.githubusercontent.com/SimonGino/SubConver-Clash-Profile/master/outpref.ini"
-              },
-              {
-                label: "ACL4SSR_Online_NoAuto 无自动测速 (与Github同步)",
-                value:
-                  "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_NoAuto.ini"
               },
               {
                 label: "ACL4SSR_Online_Mini_NoAuto.ini 精简版 不带自动测速 (与Github同步)",
@@ -326,7 +313,7 @@ export default {
             ]
           }
         ]
-      },
+      },	
       form: {
         sourceSubUrl: "",
         clientType: "",
