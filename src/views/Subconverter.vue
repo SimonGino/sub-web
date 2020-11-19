@@ -294,10 +294,15 @@ export default {
             label: "ACL4SSR",
             options: [
               {
-                label: "自用",
+                label: "自用-通用版",
+                value:
+                  "https://raw.githubusercontent.com/SimonGino/SubConver-Clash-Profile/master/Online_Full_NoAuto.ini"
+              },
+              {
+                label: "薯条特别版",
                 value:
                   "https://raw.githubusercontent.com/SimonGino/SubConver-Clash-Profile/master/outpref.ini"
-              },	    
+              },	      
               {
                 label: "ACL4SSR_Online 默认版 分组比较全 (与Github同步)",
                 value:
