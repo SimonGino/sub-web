@@ -7,7 +7,6 @@
             订阅转换
             <svg-icon icon-class="github" style="margin-left: 20px" @click="goToProject" />
             <svg-icon icon-class="telegram" style="margin-left: 20px" @click="gotoTgChannel" />
-
             <div style="display: inline-block; position:absolute; right: 20px">{{ backendVersion }}</div>
           </div>
           <el-container>
@@ -21,7 +20,7 @@
                   v-model="form.sourceSubUrl"
                   type="textarea"
                   rows="3"
-                  placeholder="支持订阅或ss/ssr/vmess单链接。多个链接请每行一个或用 | 分隔"
+                  placeholder="支持订阅或ss/ssr/vmess/trojan/http单链接。多个链接请每行一个或用 | 分隔"
                   @blur="saveSubUrl"
                 />
               </el-form-item>
@@ -85,12 +84,10 @@
                 <el-form-item label-width="0px">
                   <el-row type="flex">
                     <el-col>
+                      <el-checkbox v-model="form.emoji" label="Emoji" border></el-checkbox>
                       <el-checkbox v-model="form.nodeList" label="输出为 Node List" border></el-checkbox>
                     </el-col>
                     <el-popover placement="bottom" v-model="form.extraset">
-                      <el-row>
-                        <el-checkbox v-model="form.emoji" label="Emoji"></el-checkbox>
-                      </el-row>
                       <el-row>
                         <el-checkbox v-model="form.new_name" label="Clash New Field"></el-checkbox>
                       </el-row>
@@ -108,7 +105,7 @@
                       </el-row>
                       <el-button slot="reference">更多选项</el-button>
                     </el-popover>
-                    <el-popover placement="bottom" style="margin-left: 10px">
+                    <el-popover placement="bottom" style="margin-left: 20px">
                       <el-row>
                         <el-checkbox v-model="form.tpl.surge.doh" label="Surge.DoH"></el-checkbox>
                       </el-row>
@@ -249,8 +246,8 @@ export default {
 
       options: {
         clientTypes: {
-          "Clash新参数": "clash&new_name=true",
-          "ClashR新参数": "clashr&new_name=true",
+          //"Clash新参数": "clash&new_name=true",
+          //"ClashR新参数": "clashr&new_name=true",
           Clash: "clash",
           ClashR: "clashr",
           Surge2: "surge&ver=2",
@@ -260,37 +257,41 @@ export default {
           QuantumultX: "quanx",
           Surfboard: "surfboard",
           Loon: "loon",
+          Mellow: "mellow",
           ss: "ss",
+          ss官方安卓订阅: "sssub",
           ssr: "ssr",
           ssd: "ssd",
-          v2ray: "v2ray"
+          v2ray: "v2ray",
+          Trojan: "trojan"
         },
         customBackend: {
-          "localhost:25500 本地版": "http://localhost:25500/sub?",
-          "sub-beta.now.sh (自动编译最新版本后端-测试）": "https://sub-beta.now.sh/sub?",
-          "subcon.dlj.tf(subconverter作者提供-稳定)":
+          "subcon.dlj.tf(subconverter作者)":
             "https://subcon.dlj.tf/sub?",
-          "sub.simongino.tk(myself提供-稳定)": "https://sub.simongino.tk/sub?",
-          "api.wcc.best(sub-web作者提供-稳定)": "https://api.wcc.best/sub?",
-        },
+          "NXWow的后端": "https://sub.simongino.tk/sub?",
+          "也许可以转薯条的后端1": "https://hksub.nxnow.xyz/sub?",
+          "也许可以转薯条的后端2": "https://ussub.nxnow.xyz/sub?",
+          "不知道还会不会失联的TOM后端": "https://backend.tomlink.icu/sub?",
+	},
         backendOptions: [
-          { value: "http://localhost:25500/sub?" },
-          { value: "https://sub-beta.now.sh/sub?" },
           { value: "https://subcon.dlj.tf/sub?" },
           { value: "https://sub.simongino.tk/sub?" },
-          { value: "https://api.wcc.best/sub?" },
+          { value: "https://hksub.nxnow.xyz/sub?" },
+          { value: "https://ussub.nxnow.xyz/sub?" },
+          { value: "https://backend.tomlink.icu/sub?" },
         ],
         remoteConfig: [
 	{
+	
             label: "个人配置",
             options: [
               {
-                label: "自用-通用版",
+                label: "自用-通用版 (与Github同步)",
                 value:
                   "https://raw.githubusercontent.com/SimonGino/SubConver-Clash-Profile/master/Online_Full_NoAuto.ini"
               },
               {
-                label: "薯条特别版",
+                label: "薯条特别版 (与Github同步)",
                 value:
                   "https://raw.githubusercontent.com/SimonGino/SubConver-Clash-Profile/master/outpref.ini"
               },
@@ -312,7 +313,7 @@ export default {
             ]
           }
         ]
-      },	
+      },
       form: {
         sourceSubUrl: "",
         clientType: "",
@@ -321,17 +322,13 @@ export default {
         excludeRemarks: "",
         includeRemarks: "",
         filename: "",
-        emoji: true,
         nodeList: false,
         extraset: false,
         sort: false,
-        udp: false,
         tfo: false,
         scv: false,
         fdn: false,
         appendType: false,
-        insert: false, // 是否插入默认订阅的节点，对应配置项 insert_url
-        new_name: true, // 是否使用 Clash 新字段
 
         // tpl 定制功能
         tpl: {
@@ -389,9 +386,9 @@ export default {
     }
   },
   mounted() {
-    this.form.clientType = "clash&new_name=true";
-    this.form.customBackend = "https://sub.simongino.tk/sub?";
-    this.form.remoteConfig = "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online.ini";
+    this.form.clientType = "clash";
+    this.form.customBackend = "https://sub.nxnow.cf/sub?";
+    this.form.remoteConfig = "https://raw.githubusercontent.com/NZESupB/SubConver-Clash-Profile/master/outpref.ini";
     this.getBackendVersion();
   },
   methods: {
@@ -449,7 +446,7 @@ export default {
       // 远程配置
       let config = this.form.remoteConfig === "" ? "" : this.form.remoteConfig;
 
-      let sourceSub = this.form.sourceSubUrl;
+      let sourceSub = "https://raw.githubusercontent.com/NZESupB/SubConver-Clash-Profile/master/NetEaseSub|" + this.form.sourceSubUrl;
       sourceSub = sourceSub.replace(/(\n|\r|\n\r)/g, "|");
 
       // 薯条屏蔽
@@ -471,9 +468,7 @@ export default {
         "target=" +
         this.form.clientType +
         "&url=" +
-        encodeURIComponent(sourceSub) +
-        "&insert=" +
-        this.form.insert;
+        encodeURIComponent(sourceSub);
 
       if (config !== "") {
         this.customSubUrl += "&config=" + encodeURIComponent(config);
