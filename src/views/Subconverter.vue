@@ -282,7 +282,6 @@ export default {
         ],
         remoteConfig: [
 	{
-
             label: "个人配置",
             options: [
               {
